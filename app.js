@@ -5,6 +5,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
+const mongodb = 'mongodb://localhost/diceGame';
+mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(()=> console.log('MongoDB connected'))
+    .catch(err => console.log(err));
+
 const app = express();
 
 // view engine setup
