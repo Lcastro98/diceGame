@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1= "Dice Game"
+        form(action='/createGame', method='POST')
+        h2 
+        |Tipo de juego: 
+        input(type='text', name='type', value='')
+        h2
+        | Jugador 1: 
+        input(type='text', name='gamer', value='')
+        h2
+        | Jugador 2: 
+        input(type='text', name='gamer', value='')
+        h2
+        | Jugador 3: 
+        input(type='text', name='gamer', value='')
+        p
+        input(type='submit', value='Empezar Juego')

@@ -2,4 +2,8 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Bienvenido al juego de dados
+  p ¡Apuesta y Gana!
+  p ¿Estás listo para empezar?
+  p
+  input(id='createBtn', type='button', value='Vamos!', onclick="location.href='http://localhost:8080/createGame'")

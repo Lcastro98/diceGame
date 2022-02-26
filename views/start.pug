@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1= "Juego de Dados"
+        form(action='/createGame', method='POST')
+        p
+        | Tipo de juego: 
+        input(type='text', name='type', value='')
+        p
+        | Jugador 1: 
+        input(type='text', name='gamer', value='')
+        p
+        | Jugador 2: 
+        input(type='text', name='gamer', value='')
+        p
+        | Jugador 3: 
+        input(type='text', name='gamer', value='')
+        p
+        input(type='submit', value='Empezar Juego')
