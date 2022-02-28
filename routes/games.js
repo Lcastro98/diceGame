@@ -1,17 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const gameController = require('../controllers/gameController')
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  const data = Game.find({
-    $or: [
-      { 'delete': {$eq: false } },
-      { 'delete': { $exists: false } },
-    ]
-  });
-  data
-    .then(result => res.json(result))
-    .catch(err => console.log(err));
-});
+router.get('/', gameController.games);
+
+router.get('/:id', gameController.gameDetails);
 
 module.exports = router;

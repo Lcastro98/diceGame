@@ -1,19 +1,19 @@
 extends layout
 
 block content
-    h1= "Juego de Dados"
-        form(action='/createGame', method='POST')
-        p
-        | Tipo de juego: 
-        input(type='text', name='type', value='')
-        p
-        | Jugador 1: 
-        input(type='text', name='gamer', value='')
-        p
-        | Jugador 2: 
-        input(type='text', name='gamer', value='')
-        p
-        | Jugador 3: 
-        input(type='text', name='gamer', value='')
+    h1= "Dice Game"
+    form(action='/startGame', method='post')
+        h2
+        | Identificador de Juego: 
+        input(type='text', name='game', value='', placeholder='Ingrese el ID del juego')
+        h2
+        | Apuesta Jugador 1: 
+        input(type='text', name='bet', value='', placeholder='Ingrese la apuesta')
+        h2
+        | Apuesta Jugador 2: 
+        input(type='text', name='bet', value='', placeholder='Ingrese la apuesta')
+        h2
+        | Apuesta Jugador 3: 
+        input(type='text', name='bet', value='', placeholder='Ingrese la apuesta')
         p
         input(type='submit', value='Empezar Juego')

@@ -9,11 +9,8 @@ p {
   text-align: center;
 }
 
-input {
+input, select, option {
   font: 25px "Lucida Grande", Helvetica, Arial, sans-serif;  
   text-align: "center";
 }
 
-a {
-  color: #00B7FF;
-}

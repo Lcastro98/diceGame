@@ -1,19 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 const mongooseSoftDelete = require('mongoose-delete');
 
 const gameSchema = new Schema({
+    id: {
+        type: ObjectId
+    },
     type: {
         type: String,
-        requiered: [true, 'El tipo de apuesta es requerido']
+        default: "",
     },
-    gamers: {
-        name: [{
-            type: String,
-            trim: true,
-            require: [true, 'El nombre del jugador es requerido']
-        }]
-    }
+    gamers: [{
+        name: {
+          type: String,
+          trim: true,
+        }
+      }
+    ],
 }, { timestamps: true });
 
 gameSchema.plugin(mongooseSoftDelete);

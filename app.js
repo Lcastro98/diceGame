@@ -24,10 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
 app.use('/games', require('./routes/games'));
-app.use('/game', require('./routes/createGame'));
+app.use('/', require('./routes/createGame'));
 //app.use('/game', require('./routes/game/:id'));
 //app.use('/game', require('./routes/game/:id/winner'));
-//app.use('/game', require('./routes/startGame'));
+app.use('/game', require('./routes/startGame'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

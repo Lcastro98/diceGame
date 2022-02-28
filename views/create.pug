@@ -1,19 +1,19 @@
 extends layout
 
 block content
+    div
     h1= "Dice Game"
-        form(action='/createGame', method='POST')
-        h2 
-        |Tipo de juego: 
-        input(type='text', name='type', value='')
+    form(action='/createGame', method='post')
         h2
-        | Jugador 1: 
-        input(type='text', name='gamer', value='')
+        | Nombre: 
+        input(type='text', name='Jugador1', value='', placeholder="Jugador 1" required)
         h2
-        | Jugador 2: 
-        input(type='text', name='gamer', value='')
+        | Nombre: 
+        input(type='text', name='gamer2', value='', placeholder="Jugador 2" required)
         h2
-        | Jugador 3: 
-        input(type='text', name='gamer', value='')
+        | Nombre: 
+        input(type='text', name='gamer3', value='', placeholder="Jugador 3" required)
         p
-        input(type='submit', value='Empezar Juego')
+        input(type='submit', value='Continuar')
+        p
+        a(href='/') Volver
