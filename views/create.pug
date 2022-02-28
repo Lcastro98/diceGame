@@ -4,16 +4,15 @@ block content
     div
     h1= "Dice Game"
     form(action='/createGame', method='post')
-        h2
-        | Nombre: 
-        input(type='text', name='Jugador1', value='', placeholder="Jugador 1" required)
-        h2
-        | Nombre: 
-        input(type='text', name='gamer2', value='', placeholder="Jugador 2" required)
-        h2
-        | Nombre: 
-        input(type='text', name='gamer3', value='', placeholder="Jugador 3" required)
+        label(for='gamers') Nombre:
+        input(type='text', id='gamers', name='gamers', value='', placeholder="Jugador 1" required)
         p
-        input(type='submit', value='Continuar')
+        label(for='gamers') Nombre:
+        input(type='text', id='gamers', name='gamers', value='', placeholder="Jugador 2" required)
+        p
+        label(for='gamers') Nombre:
+        input(type='text', id='gamers', name='gamers', value='', placeholder="Jugador 3" required)
+        p
+        button(type='submit') Continuar
         p
         a(href='/') Volver

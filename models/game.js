@@ -12,12 +12,22 @@ const gameSchema = new Schema({
         default: "",
     },
     gamers: [{
-        name: {
-          type: String,
-          trim: true,
-        }
+      name: {
+        type: String,
+        trim: true,
+        default: ''
       }
-    ],
+    }],
+    inProgress: {
+      type: Boolean,
+      default: false,
+    },
+    winner: {
+      name: {
+        type: String,
+        default: '',
+      }
+    }
 }, { timestamps: true });
 
 gameSchema.plugin(mongooseSoftDelete);

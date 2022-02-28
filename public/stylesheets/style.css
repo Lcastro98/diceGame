@@ -9,7 +9,7 @@ p {
   text-align: center;
 }
 
-input, select, option {
+input, select, option, button {
   font: 25px "Lucida Grande", Helvetica, Arial, sans-serif;  
   text-align: "center";
 }
