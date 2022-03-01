@@ -15,8 +15,25 @@ const games = (req, res, next) => {
 const gameDetails = (req, res) => {
     const id = req.params.id;
     Game.findById(id)
-        .then(result => {
-            res.render('game', {game: result, title: 'Game Details'});
+        .then(result => { {res.json({
+            "id": result._id,
+            "gamers": {
+                'result.gamers[0]._id' : {
+                    "id": result.gamers[0]._id,
+                    "name": result.gamers[0].name},
+                "result.gamers[1]._id" : {
+                    "id": result.gamers[1]._id,
+                    "name": result.gamers[1].name},
+                "result.gamers[2]._id" : {
+                    "id": result.gamers[2]._id,
+                    "name": result.gamers[2].name},
+            },
+            "inProgress": result.inProgress,
+            "winner": {
+                "id": result.winner._id,
+                "name": result.gamers.winner
+            }}
+            )}
         })
         .catch(err => {
             console.log(err);
@@ -35,7 +52,14 @@ const gameCreatePost = (req, res) => {
     });
 
     game.save()
-        .then((result) => {res.json(result)})
+        .then((result) => {res.json({
+            "id": result._id,
+            "type": result.type,
+            "gamers": [
+                result.gamers[0].name,
+                result.gamers[1].name,
+                result.gamers[2].name]
+        })})
         .catch((err) => {res.json(err)});
 }
 

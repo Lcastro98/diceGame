@@ -15,9 +15,12 @@ const gameSchema = new Schema({
       name: {
         type: String,
         trim: true
+      },
+      bet: {
+        type: Number,
       }
     }],
-    /*inProgress: {
+    inProgress: {
       type: Boolean,
       default: false,
     },
@@ -26,7 +29,7 @@ const gameSchema = new Schema({
         type: String,
         default: '',
       }
-    }*/
+    }
 }, { timestamps: true });
 
 gameSchema.plugin(mongooseSoftDelete);
