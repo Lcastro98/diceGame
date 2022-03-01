@@ -5,13 +5,13 @@ block content
     h1= "Dice Game"
     form(action='/createGame', method='post')
         label(for='gamers') Nombre:
-        input(type='text', id='gamers', name='gamers', value='', placeholder="Jugador 1" required)
+        input(type='text', id='gamers', name='gamers[0][name]', value='', placeholder="Jugador 1" required)
         p
         label(for='gamers') Nombre:
-        input(type='text', id='gamers', name='gamers', value='', placeholder="Jugador 2" required)
+        input(type='text', id='gamers', name='gamers[1][name]', value='', placeholder="Jugador 2" required)
         p
         label(for='gamers') Nombre:
-        input(type='text', id='gamers', name='gamers', value='', placeholder="Jugador 3" required)
+        input(type='text', id='gamers', name='gamers[2][name]', value='', placeholder="Jugador 3" required)
         p
         button(type='submit') Continuar
         p

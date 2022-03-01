@@ -14,11 +14,10 @@ const gameSchema = new Schema({
     gamers: [{
       name: {
         type: String,
-        trim: true,
-        default: ''
+        trim: true
       }
     }],
-    inProgress: {
+    /*inProgress: {
       type: Boolean,
       default: false,
     },
@@ -27,7 +26,7 @@ const gameSchema = new Schema({
         type: String,
         default: '',
       }
-    }
+    }*/
 }, { timestamps: true });
 
 gameSchema.plugin(mongooseSoftDelete);
