@@ -18,13 +18,13 @@ const gameDetails = (req, res) => {
         .then(result => { {res.json({
             "id": result._id,
             "gamers": {
-                'result.gamers[0]._id' : {
+                [result.gamers[0]._id] : {
                     "id": result.gamers[0]._id,
                     "name": result.gamers[0].name},
-                "result.gamers[1]._id" : {
+                [result.gamers[1]._id] : {
                     "id": result.gamers[1]._id,
                     "name": result.gamers[1].name},
-                "result.gamers[2]._id" : {
+                [result.gamers[2]._id] : {
                     "id": result.gamers[2]._id,
                     "name": result.gamers[2].name},
             },
