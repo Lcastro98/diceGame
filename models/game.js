@@ -14,10 +14,13 @@ const gameSchema = new Schema({
     gamers: [{
       name: {
         type: String,
-        trim: true
+        trim: true,
+        require: true
       },
       bet: {
         type: Number,
+        default: 0,
+        require: true
       }
     }],
     inProgress: {

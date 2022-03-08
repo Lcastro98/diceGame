@@ -9,8 +9,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/createGame', gameController.gameCreateGet);
 
-router.get('/startGame', function(req, res, next) {
-  res.render('start', { title: 'Dice Game' });
-});
+router.get('/startGame', gameController.startGameGet);
 
 module.exports = router;

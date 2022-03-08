@@ -1,4 +1,5 @@
 const Game = require('../models/game');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const games = (req, res, next) => {
     const data = Game.find({
@@ -44,7 +45,7 @@ const gameCreateGet = (req, res) => {
     res.render('create', { title: 'Dice Game' });
 }
 
-const gameCreatePost = (req, res) => {
+const gameCreatePost = async(req, res) => {
     const game = new Game({
         id: req.body.id,
         type: req.body.type,
@@ -52,7 +53,7 @@ const gameCreatePost = (req, res) => {
     });
 
     game.save()
-        .then((result) => {res.json({
+        .then((result) => { res.json({
             "id": result._id,
             "type": result.type,
             "gamers": [
@@ -63,23 +64,28 @@ const gameCreatePost = (req, res) => {
         .catch((err) => {res.json(err)});
 }
 
-const startCreatePost = (req, res) => {
-    Game.findOne({_id:id})
+const startGameGet = (req, res) => {
+    res.render('start', { title: 'Dice Game' });
+}
+
+const startGamePost = (req, res) => {
+    const oldGamers = Game.toString();
+    console.log(oldGamers);
+    /*let body = req.body;
+    Game.updateOne({ _id : body._id }, {
+        $set: {
+            gamers : body.gamers
+    }})
         .then((result) => {res.json({
             "id": result._id,
             "type": "",
-            "gamerBet": [{
-                "id": result.gamers[0]._id,
-                "bet": gamerBet[0]
-            },{
-                "id": result.gamers[1]._id,
-                "bet": gamerBet[1]
-            },{
-                "id": result.gamers[2]._id,
-                "bet": gamerBet[2]
-            }]
+            "gamerBet": {
+                [result.gamers[0]._id] : [result.gamers[0].bet],
+                [result.gamers[1]._id] : [result.gamers[1].bet], 
+                [result.gamers[2]._id] : [result.gamers[2].bet]
+            }
         })})
-        .catch((err) => {res.json(err)});
+        .catch((err) => {res.json(err)});*/
 }
 
 module.exports = {
@@ -87,5 +93,6 @@ module.exports = {
     gameDetails,
     gameCreateGet,
     gameCreatePost,
-    startCreatePost
+    startGameGet,
+    startGamePost
 }

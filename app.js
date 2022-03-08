@@ -25,9 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/games', require('./routes/games'));
 app.use('/createGame', require('./routes/createGame'));
-app.use('/game', require('./routes/games'));
+app.use('/game/:id', require('./routes/games'));
 //app.use('/game', require('./routes/game/:id/winner'));
-app.use('/game', require('./routes/startGame'));
+app.use('/startGame', require('./routes/startGame'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
