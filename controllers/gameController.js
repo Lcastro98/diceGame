@@ -1,3 +1,4 @@
+const game = require('../models/game');
 const Game = require('../models/game');
 const ObjectId = require('mongoose').Types.ObjectId;
 
@@ -68,25 +69,30 @@ const startGameGet = (req, res) => {
     res.render('start', { title: 'Dice Game' });
 }
 
-const startGamePost = (req, res) => {
-    const oldGamers = Game.toString();
-    console.log(oldGamers);
-    /*let body = req.body;
-    Game.updateOne({ _id : body._id }, {
-        $set: {
-            gamers : body.gamers
-    }})
-        .then((result) => {res.json({
-            "id": result._id,
-            "type": "",
-            "gamerBet": {
-                [result.gamers[0]._id] : [result.gamers[0].bet],
-                [result.gamers[1]._id] : [result.gamers[1].bet], 
-                [result.gamers[2]._id] : [result.gamers[2].bet]
-            }
-        })})
-        .catch((err) => {res.json(err)});*/
+const startGamePost = async (req, res) => {
+    let body = req.body;
+
+    for (let i = 0; i < 3; i++) {
+        Game.findOne({_id: body._id})
+        .then(result => Game.updateOne({ _id : body._id },
+            {$set: 
+                {"gamers.$[gamer].bet": body.gamers[i].bet}},
+                {arrayFilters:[{"gamer._id": {$eq: ObjectId(result.gamers[i]._id)}}]}))
+        .then(result => console.log(result))
+        .catch((err) => {res.json(err)});
+    } 
+    Game.findOne({_id: body._id})
+    .then((result) => {res.json({
+        "id": result._id,
+        "type": "",
+        "gamerBet": {
+            [result.gamers[0]._id] : result.gamers[0].bet,
+            [result.gamers[1]._id] : result.gamers[1].bet, 
+            [result.gamers[2]._id] : result.gamers[2].bet
+    }})})
+    .catch((err) => {res.json(err)})
 }
+
 
 module.exports = {
     games,
