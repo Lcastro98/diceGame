@@ -18,26 +18,29 @@ const games = (req, res, next) => {
 const gameDetails = async(req, res) => {
     const id = req.params.id;
     Game.findById(id)
-    .then((result) => { {res.json({
-        "id": result._id,
-        "gamers": {
-            [result.gamers[0]._id] : {
-                "id": result.gamers[0]._id,
-                "name": result.gamers[0].name},
-            [result.gamers[1]._id] : {
-                "id": result.gamers[1]._id,
-                "name": result.gamers[1].name},
-            [result.gamers[2]._id] : {
-                "id": result.gamers[2]._id,
-                "name": result.gamers[2].name},
-        },
-        "inProgress": result.inProgress,
-        "winner": {
-            "id": result.winner._id,
-            "name": result.winner.name
-        }}
+    .then((result) => { 
+        for (let i = 0; i < 3; i++) {
+            if (result.gamers[i].name === result.winner.name) 
+            {res.json({
+            "id": result._id,
+            "gamers": {
+                [result.gamers[0]._id] : {
+                    "id": result.gamers[0]._id,
+                    "name": result.gamers[0].name},
+                [result.gamers[1]._id] : {
+                    "id": result.gamers[1]._id,
+                    "name": result.gamers[1].name},
+                [result.gamers[2]._id] : {
+                    "id": result.gamers[2]._id,
+                    "name": result.gamers[2].name},
+            },
+            "inProgress": result.inProgress,
+            "winner": {
+                "id": result.gamers[i]._id,
+                "name": result.winner.name
+            }}
         )}
-        })
+        }})
         .catch((err) => {res.json(err)});
 }
 
@@ -101,7 +104,7 @@ const startGamePost = async (req, res) => {
             if (num === result.gamers[i].bet){
                 Game.updateOne({ _id : body._id }, {
                     $set: {
-                        winner: {name: result.gamers[i].name}}}).catch(err => console.log(err))
+                        winner: { name: result.gamers[i].name}}}).catch(err => console.log(err))
             break
             } else {console.log("no hay ganador")}
         }
@@ -110,14 +113,17 @@ const startGamePost = async (req, res) => {
 }
 
 const winnerGet = (req, res) => {
-    //res.render('start', { title: 'Dice Game' });
     const id = req.params.id;
     Game.findById(id)
-    .then((result) => { {res.json({
-        "id": result.winner._id,
-        "name": result.winner.name
-    })}
-    })
+    .then(result => {
+    for (let i = 0; i < 3; i++) {
+        if (result.gamers[i].name === result.winner.name){
+            {res.json({
+                "id": result.gamers[i]._id,
+                "name": result.winner.name
+            })}
+            break
+        }}})
         .catch((err) => {res.json(err)});
 }
 
