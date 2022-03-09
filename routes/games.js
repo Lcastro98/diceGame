@@ -3,8 +3,15 @@ const router = express.Router();
 const gameController = require('../controllers/gameController')
 
 /* GET users listing. */
-router.get('/', gameController.games);
 
-router.get('/', gameController.gameDetails);
+/*router.get('/games', function(req, res, next) {
+    res.render('games', { title: 'Dice Game' });
+  });*/
+
+router.get('/games', gameController.games);
+
+router.get('/game/:id', gameController.gameDetails);
+
+router.get('/game/:id/winner', gameController.winnerGet)
 
 module.exports = router;

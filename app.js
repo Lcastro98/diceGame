@@ -23,10 +23,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
-app.use('/games', require('./routes/games'));
+app.use('/', require('./routes/games'));
 app.use('/createGame', require('./routes/createGame'));
-app.use('/game/:id', require('./routes/games'));
-//app.use('/game', require('./routes/game/:id/winner'));
+app.use('/', require('./routes/games'));
+app.use('/', require('./routes/games'));
 app.use('/startGame', require('./routes/startGame'));
 
 // catch 404 and forward to error handler
@@ -45,18 +45,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.use((req, res, next) => {
 
-  // Dominio que tengan acceso (ej. 'http://example.com')
-     res.setHeader('Access-Control-Allow-Origin', '*');
-  
-  // Metodos de solicitud que deseas permitir
-     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  
-  // Encabecedados que permites (ej. 'X-Requested-With,content-type')
-     res.setHeader('Access-Control-Allow-Headers', '*');
-  
-  next();
-  })
 
 module.exports = app;

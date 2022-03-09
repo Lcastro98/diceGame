@@ -14,3 +14,14 @@ input, select, option, button {
   text-align: "center";
 }
 
+footer {
+  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;  
+  position:absolute;
+  bottom:4em;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+

@@ -10,37 +10,37 @@ const games = (req, res, next) => {
         ]
       });
       data
+        res.render('games', { title: 'Dice Game' })
         .then(result => res.json(result))
         .catch(err => console.log(err));
 }
 
-const gameDetails = (req, res) => {
+const gameDetails = async(req, res) => {
     const id = req.params.id;
     Game.findById(id)
-        .then(result => { {res.json({
-            "id": result._id,
-            "gamers": {
-                [result.gamers[0]._id] : {
-                    "id": result.gamers[0]._id,
-                    "name": result.gamers[0].name},
-                [result.gamers[1]._id] : {
-                    "id": result.gamers[1]._id,
-                    "name": result.gamers[1].name},
-                [result.gamers[2]._id] : {
-                    "id": result.gamers[2]._id,
-                    "name": result.gamers[2].name},
-            },
-            "inProgress": result.inProgress,
-            "winner": {
-                "id": result.winner._id,
-                "name": result.gamers.winner
-            }}
-            )}
+    .then((result) => { {res.json({
+        "id": result._id,
+        "gamers": {
+            [result.gamers[0]._id] : {
+                "id": result.gamers[0]._id,
+                "name": result.gamers[0].name},
+            [result.gamers[1]._id] : {
+                "id": result.gamers[1]._id,
+                "name": result.gamers[1].name},
+            [result.gamers[2]._id] : {
+                "id": result.gamers[2]._id,
+                "name": result.gamers[2].name},
+        },
+        "inProgress": result.inProgress,
+        "winner": {
+            "id": result.winner._id,
+            "name": result.winner.name
+        }}
+        )}
         })
-        .catch(err => {
-            console.log(err);
-        });
+        .catch((err) => {res.json(err)});
 }
+
 
 const gameCreateGet = (req, res) => {
     res.render('create', { title: 'Dice Game' });
@@ -69,16 +69,18 @@ const startGameGet = (req, res) => {
     res.render('start', { title: 'Dice Game' });
 }
 
+function numRand(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
 const startGamePost = async (req, res) => {
     let body = req.body;
-
     for (let i = 0; i < 3; i++) {
         Game.findOne({_id: body._id})
         .then(result => Game.updateOne({ _id : body._id },
             {$set: 
                 {"gamers.$[gamer].bet": body.gamers[i].bet}},
                 {arrayFilters:[{"gamer._id": {$eq: ObjectId(result.gamers[i]._id)}}]}))
-        .then(result => console.log(result))
         .catch((err) => {res.json(err)});
     } 
     Game.findOne({_id: body._id})
@@ -91,7 +93,35 @@ const startGamePost = async (req, res) => {
             [result.gamers[2]._id] : result.gamers[2].bet
     }})})
     .catch((err) => {res.json(err)})
+    Game.findOne({_id: body._id})
+    .then(result =>  {
+        let num = numRand(1,6)
+        console.log(num)
+        for (let i = 0; i < 3; i++) {
+            if (num === result.gamers[i].bet){
+                Game.updateOne({ _id : body._id }, {
+                    $set: {
+                        winner: {name: result.gamers[i].name}}}).catch(err => console.log(err))
+            break
+            } else {console.log("no hay ganador")}
+        }
+
+    })
 }
+
+const winnerGet = (req, res) => {
+    //res.render('start', { title: 'Dice Game' });
+    const id = req.params.id;
+    Game.findById(id)
+    .then((result) => { {res.json({
+        "id": result.winner._id,
+        "name": result.winner.name
+    })}
+    })
+        .catch((err) => {res.json(err)});
+}
+
+
 
 
 module.exports = {
@@ -100,5 +130,6 @@ module.exports = {
     gameCreateGet,
     gameCreatePost,
     startGameGet,
-    startGamePost
+    startGamePost,
+    winnerGet
 }
