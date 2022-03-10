@@ -68,18 +68,18 @@ function numRand(min, max) {
 /**
 * Permite empezar el juego, indicando las apuestas de los jugadores y generando un valor aleatorio.
 */
-const startGamePost = async (req, res) => {
+const startGamePost = (req, res) => {
     let body = req.body;
     for (let i = 0; i < 3; i++) {
         Game.findOne({_id: body._id})
-        .then(result => Game.updateOne({ _id : body._id },
+        .then( (result) => Game.updateOne({ _id : body._id },
             {$set: 
                 {"gamers.$[gamer].bet": body.gamers[i].bet}},
                 {arrayFilters:[{"gamer._id": {$eq: ObjectId(result.gamers[i]._id)}}]}))
         .catch((err) => {res.json(err)});
     } 
-    Game.findOne({_id: body._id})
-    .then((result) => {res.json({
+    setTimeout(()=> {Game.findOne({_id: body._id})
+    .then((result) => { res.json({
         "id": result._id,
         "type": "",
         "gamerBet": {
@@ -87,7 +87,7 @@ const startGamePost = async (req, res) => {
             [result.gamers[1]._id] : result.gamers[1].bet, 
             [result.gamers[2]._id] : result.gamers[2].bet
     }})})
-    .catch((err) => {res.json(err)})
+    .catch((err) => {res.json(err)})}, 500)
     Game.findOne({_id: body._id})
     .then(result =>  {
         let num = numRand(1,6)
