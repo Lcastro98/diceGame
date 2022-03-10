@@ -7,6 +7,13 @@ Proyecto demo en donde se realiza una separación de responsabilidades usando lo
 - Logica (Controlador)
 - Datos (Modelo)
 
+## Construido con 🛠️
+
+- [NodeJS](https://nodejs.org/es/download/)
+- [MongoDB](https://www.mongodb.com/try/download/community)
+
+Es necesario tener instaladas estas herramientas antes de ejecutar la aplicación.
+
 ## Preparando el entorno 🔧
 
 Para empezar clone el repositorio en su computador:
@@ -27,16 +34,11 @@ localhost:8080
 ```
 Una vez aquí puede escoger entre crear un nuevo juego con el botón **Crear** o ver los juegos de la base de datos con el botón **Ver Juegos** si desea usar la vista.
 
-## Construido con 🛠️
-
-- NodeJS con Express
-- Base de datos: MongoDB
-
 ## Request y Query  💻❓
 
 A continuación se muestra como deben ponerse los datos en Thunder Client (extensión de vsc) o en Postman dependiendo de su preferencia. Por favor tengalo en cuenta para poder hacer las pruebas de forma satisfactoria.
 
-Se ha mostrado en orden de solicitud, sin embargo, para ver de mejor manera el funcionamiento recomiendo en primer lugar realizar los POST (punto 1 y punto 4) y seguido de esto los GET en el orden deseado.
+Se ha mostrado en orden establecido en el taller, sin embargo, para ver de mejor manera el funcionamiento recomiendo en primer lugar realizar los POST (punto 1 y punto 4) y seguido de esto los GET en el orden deseado.
 
 1. Request de creación de juego, con su respectivo formulario:
 
@@ -70,4 +72,5 @@ Puede probar en su navegador con la misma url, recuerde reemplasar el id de ejem
 
 Puede probar en su navegador con la misma url, luego de ingresar el id del juego y las apuestas de cada jugador (debe ser un número del 1 al 6), se mostrará en pantalla el json con la información pedida.
 
+---
 ⌨️ con ❤️ por [Lorena Castro](https://github.com/Lcastro98) ✌
