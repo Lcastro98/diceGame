@@ -22,11 +22,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/games'));
 app.use('/createGame', require('./routes/createGame'));
-app.use('/', require('./routes/games'));
-app.use('/', require('./routes/games'));
 app.use('/startGame', require('./routes/startGame'));
 
 // catch 404 and forward to error handler

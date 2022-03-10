@@ -3,6 +3,13 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const mongooseSoftDelete = require('mongoose-delete');
 
+/**
+ * Modelo del esquema Game, permite guardar los datos de los documentos creados.
+ * 
+ * @version 1.00.00 2022-03-09 el modelo corresponde a la versión 1 del sistema.
+ * 
+ * @author Lorena Castro <lcastro0398@gmail.com>
+ */
 const gameSchema = new Schema({
     id: {
         type: ObjectId
